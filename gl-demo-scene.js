@@ -93,9 +93,9 @@ sess.demo.Scene.prototype.setNumParticles = function (numParticles) {
 	this.particles = [];
 	for (var i = 0; i < numParticles; i++) {
  		var surfaceVelocity = sess.demo.RandomInRange(sess.demo.MIN_SURFACE_VELOCITY, sess.demo.MAX_SURFACE_VELOCITY);
- 		var angleOfMotion = sess.demo.RandomInRange(0, 2 * π);
- 		var latitude = sess.demo.RandomInRange(0, 2 * π);
- 		var longitude = sess.demo.RandomInRange(0, 2 * π);
+ 		var angleOfMotion = sess.demo.RandomInRange(0, 2 * Math.PI);
+ 		var latitude = sess.demo.RandomInRange(0, 2 * Math.PI);
+ 		var longitude = sess.demo.RandomInRange(0, 2 * Math.PI);
  		var lifetime = sess.demo.RandomInRange(sess.demo.MIN_PARTICLE_LIFETIME, sess.demo.MAX_PARTICLE_LIFETIME);
 
  		var startColor = vec4.fromValues(
@@ -306,9 +306,9 @@ sess.demo.Scene.prototype.updateParticles = function (ms_dt) {
 	for (var i = 0; i < this.particles.length; i++) {
 		if (!this.particles[i].update(ms_dt)) {
 			var surfaceVelocity = sess.demo.RandomInRange(sess.demo.MIN_SURFACE_VELOCITY, sess.demo.MAX_SURFACE_VELOCITY);
-	 		var angleOfMotion = sess.demo.RandomInRange(0, 2 * π);
-	 		var latitude = sess.demo.RandomInRange(0, 2 * π);
-	 		var longitude = sess.demo.RandomInRange(0, 2 * π);
+	 		var angleOfMotion = sess.demo.RandomInRange(0, 2 * Math.PI);
+	 		var latitude = sess.demo.RandomInRange(0, 2 * Math.PI);
+	 		var longitude = sess.demo.RandomInRange(0, 2 * Math.PI);
 	 		var lifetime = sess.demo.RandomInRange(sess.demo.MIN_PARTICLE_LIFETIME, sess.demo.MAX_PARTICLE_LIFETIME);
 
 	 		var startColor = vec4.fromValues(

@@ -1,9 +1,6 @@
 var sess = sess || {};
 sess.demo = sess.demo || {};
 
-// I couldn't resist!
-var π = Math.PI;
-
 sess.demo.RandomInRange = function RandomInRange(min, max) {
 	return Math.random() * (max - min) + min;
 };
