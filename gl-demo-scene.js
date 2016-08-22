@@ -11,7 +11,7 @@ sess.demo.MAX_SURFACE_VELOCITY = 1.0;
 /** @type {!number} */
 sess.demo.MIN_PARTICLE_LIFETIME = 1.5;
 /** @type {!number} */
-sess.demo.MAX_PARTICLE_LIFETIME = 3.0;
+sess.demo.MAX_PARTICLE_LIFETIME = 10.0;
 
 /**
  * Scene used to draw all the WebGL stuff for this example scene
@@ -41,6 +41,9 @@ sess.demo.Scene = function (gl, numParticles) {
 
 	/** @private {mat4} */
 	this.mViewProj = mat4.create();
+
+	/** @private {!number} */
+	this.lastFrameTime_ = performance.now();
 
 	/**
 	 * Cached camera position, used in getting vertices and sort
@@ -78,7 +81,7 @@ sess.demo.Scene = function (gl, numParticles) {
 	/** @type {Number} */
 	this.particleHeight = 1;
 	/** @type {Number} */
-	this.ballRadius = 5;
+	this.ballRadius = 8;
 };
 
 /**
@@ -87,6 +90,7 @@ sess.demo.Scene = function (gl, numParticles) {
  */
 sess.demo.Scene.prototype.setNumParticles = function (numParticles) {
 	this.numParticles = numParticles;
+	this.particles = [];
 	for (var i = 0; i < numParticles; i++) {
  		var surfaceVelocity = sess.demo.RandomInRange(sess.demo.MIN_SURFACE_VELOCITY, sess.demo.MAX_SURFACE_VELOCITY);
  		var angleOfMotion = sess.demo.RandomInRange(0, 2 * π);
@@ -98,13 +102,13 @@ sess.demo.Scene.prototype.setNumParticles = function (numParticles) {
  			sess.demo.RandomInRange(0, 1),
  			sess.demo.RandomInRange(0, 1),
  			sess.demo.RandomInRange(0, 1),
- 			sess.demo.RandomInRange(0.7, 1)
+ 			sess.demo.RandomInRange(0.1, 0.5)
 		);
  		var endColor = vec4.fromValues(
+ 			sess.demo.RandomInRange(0, 0.2),
+ 			sess.demo.RandomInRange(0, 0.2),
  			sess.demo.RandomInRange(0, 1),
- 			sess.demo.RandomInRange(0, 1),
- 			sess.demo.RandomInRange(0, 1),
- 			sess.demo.RandomInRange(0, 0.3)
+ 			sess.demo.RandomInRange(0.1, 0.3)
 		);
 
 		this.particles[i] = new sess.demo.Particle(
@@ -120,6 +124,7 @@ sess.demo.Scene.prototype.setNumParticles = function (numParticles) {
 
 	this.vertices = new Float32Array(numParticles * 6 * 9);
 	var gl = this.gl;
+
 	gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, this.vertices, gl.DYNAMIC_DRAW);
 }
@@ -268,15 +273,19 @@ sess.demo.Scene.prototype.loadTexture = function (imgURL, cb) {
  * Call this function to begin the demo!
  */
 sess.demo.Scene.prototype.loop = function () {
-	var lastFrame = performance.now();
-	var innerLoop = function (pn) {
-		this.update((pn - lastFrame) / 1000);
-		lastFrame = pn;
-		this.draw();
-		
-		requestAnimationFrame(innerLoop.bind(this));
-	}
-	requestAnimationFrame(innerLoop.bind(this));
+	this.lastFrameTime_ = performance.now();
+	requestAnimationFrame(this.frame.bind(this));
+};
+
+/**
+ * Process a single frame. Interior of loop method.
+ */
+sess.demo.Scene.prototype.frame = function (pn) {
+	this.update((pn - this.lastFrameTime_) / 1000);
+	this.lastFrameTime_ = pn;
+	this.draw();
+	
+	requestAnimationFrame(this.frame.bind(this));
 };
 
 /**
@@ -306,11 +315,11 @@ sess.demo.Scene.prototype.updateParticles = function (ms_dt) {
 	 			sess.demo.RandomInRange(0, 1),
 	 			sess.demo.RandomInRange(0, 1),
 	 			sess.demo.RandomInRange(0, 1),
-	 			sess.demo.RandomInRange(0.7, 1)
+	 			sess.demo.RandomInRange(0.1, 0.5)
 			);
 	 		var endColor = vec4.fromValues(
-	 			sess.demo.RandomInRange(0, 1),
-	 			sess.demo.RandomInRange(0, 1),
+	 			sess.demo.RandomInRange(0, 0.2),
+	 			sess.demo.RandomInRange(0, 0.2),
 	 			sess.demo.RandomInRange(0, 1),
 	 			sess.demo.RandomInRange(0, 0.3)
 			);
