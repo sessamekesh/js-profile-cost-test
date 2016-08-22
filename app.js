@@ -8,15 +8,15 @@ var Demo = (function () {
 		return;
 	}
 
-	var Scene = new sess.demo.Scene(gl, 10);
+	var Scene = new sess.demo.Scene(gl, 300);
 	Scene.handleResize(window.innerWidth, window.innerHeight);
 	async.parallel(
 		[
 			function (callback) {
-				Scene.loadParticleShader('/glsl/particle_shader.vert', '/glsl/particle_shader.frag', callback);
+				Scene.loadParticleShader('./glsl/particle_shader.vert', './glsl/particle_shader.frag', callback);
 			},
 			function (callback) {
-				Scene.loadTexture('/assets/gradient.png', callback);
+				Scene.loadTexture('./assets/gradient.png', callback);
 			}
 		],
 		function (err, results) {
