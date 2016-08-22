@@ -1,0 +1,18 @@
+{
+  "name": "js-profile-cost-test",
+  "homepage": "https://github.com/sessamekesh/js-profile-cost-test",
+  "authors": [
+    "Kamaron Peterson <kam.is.amazing@gmail.com>"
+  ],
+  "description": "Test of javascript performance measurement in a WebGL application",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
