@@ -11,6 +11,8 @@ My favorite way to run things is with `python -m SimpleHTTPServer`, run that fro
 
 Another easy way is with `http-server` from the root directory of this project. Http-server can be installed via npm: `npm install -g http-server`
 
+[Screenshot](https://github.com/sessamekesh/js-profile-cost-test/blob/master/assets/screenshot.png)
+
 ## Testing
 Using the developer console, there are some commands that are exposed. This is very rough right now, as it is just a proof of concept. Each function runs the desired test group for a scene with 200 particles, 2000 particles, and 20000 particles.
 
