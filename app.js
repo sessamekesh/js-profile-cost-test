@@ -8,7 +8,7 @@ var Demo = (function () {
 		return;
 	}
 
-	var Scene = new sess.demo.Scene(gl, 300);
+	var Scene = new sess.demo.Scene(gl, 1500);
 	Scene.handleResize(window.innerWidth, window.innerHeight);
 	async.parallel(
 		[

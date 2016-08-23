@@ -77,9 +77,9 @@ sess.demo.Scene = function (gl, numParticles) {
 	//
 	
 	/** @type {Number} */
-	this.particleWidth = 1;
+	this.particleWidth = 0.4;
 	/** @type {Number} */
-	this.particleHeight = 1;
+	this.particleHeight = 0.4;
 	/** @type {Number} */
 	this.ballRadius = 8;
 };
